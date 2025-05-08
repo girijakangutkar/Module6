@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <style>
+      * {
+        align-items: center;
+        text-align: left;
+        justify-content: center;
+        font-family: Georgia, "Times New Roman", Times, serif;
+      }
+      h1,
+      nav {
+        text-align: center;
+      }
+      a {
+        text-decoration: none;
+        color: black;
+      }
+      header {
+        background: linear-gradient(blue, pink);
+        padding: 5px;
+      }
+      main {
+        margin: 6%;
+        text-align: center;
+        justify-content: center;
+        width: 90%;
+      }
+      label,
+      button {
+        margin-bottom: 30px;
+      }
+
+      table {
+        /* margin-left: auto;
+        margin-right: auto; */
+        border: 0.4px solid rgb(238, 233, 233);
+        width: 100%;
+      }
+      th {
+        background-color: blue;
+        border: none;
+        color: beige;
+        padding: 5px;
+        text-align: center;
+      }
+      tr,
+      td {
+        border: none;
+        padding: 10px;
+        text-align: center;
+      }
+      form {
+        text-align: left;
+        /* justify-self: center; */
+      }
+      footer {
+        background-color: linear-gradient(blue, pink);
+        height: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>My Portfolio</h1>
+      <nav>
+        <a href="#Home">Home</a>&nbsp; <a href="#About">About</a>&nbsp;
+        <a href="#Projects">Projects</a>&nbsp;
+        <a href="#Contact">Contact</a>
+      </nav>
+    </header>
+    <main>
+      <section id="Home">
+        <h2>Welcome to My Portfolio</h2>
+        <p>
+          This portfolio showcases my projects and provides information about my
+          background and contact details.
+        </p>
+      </section>
+      <section id="About">
+        <h2>About</h2>
+        <p>
+          Hello! I'm a web developer passionate about building dynamic and
+          responsive websites. I enjoy creating user-friendly interfaces and
+          working on challenging projects
+        </p>
+      </section>
+      <section id="Prijects">
+        <table>
+          <thead>
+            <tr>
+              <th>Project Name</th>
+              <th>Description</th>
+              <th>Year</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Project Alpha</td>
+              <td>
+                A web-based tool for tracking project progress and managing
+                tasks.
+              </td>
+              <td>2023</td>
+            </tr>
+            <tr>
+              <td>Project Site</td>
+              <td>
+                A personal website showcasing my work and skills as a web
+                developer.
+              </td>
+              <td>2024</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section id="Contact">
+        <h2>Contact</h2>
+        <form>
+          <label for="name">Name:</label>
+          <br />
+          <input name="name" type="text" />
+          <br />
+          <label for="email">Email:</label>
+          <br />
+          <input name="email" type="email" />
+          <br />
+          <label for="msg">Message:</label>
+          <br />
+          <input name="msg" type="text" />
+          <br />
+          <button type="submit">Submit</button>
+        </form>
+      </section>
+    </main>
+    <footer>
+      <p>Copy right</p>
+    </footer>
+  </body>
+</html>
