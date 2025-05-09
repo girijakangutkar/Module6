@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My portfolio</title>
+    <link rel="stylesheet" href="portfolioWIthStyle.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Welcome to My Portfolio</h1>
+      <nav>
+        <a href="#">About</a>&nbsp;&nbsp; <a href="#">Projects</a>&nbsp;&nbsp;
+        <a href="#">Contact</a>
+      </nav>
+    </header>
+    <main>
+      <section>
+        <h2>About me</h2>
+        <p>
+          Hello! I'm a web developer with a passion for creating functional and
+          beautiful web application
+        </p>
+        <div id="myPic">
+          <p>A picture of me</p>
+          <!-- <img
+            src="https://www.pinclipart.com/picdir/middle/58-583283_kermit-the-frog-clipart-kermit-the-frog-art.png"
+            alt="My Picture"
+          /> -->
+        </div>
+      </section>
+      <section>
+        <h2>Projects</h2>
+        <div class="pro">
+          <h3>Project one: Personal Blog</h3>
+          <p class="ScreenShots">ScreenShot of my personal blog project</p>
+          <div class="PROIMG">
+            <img
+              src="https://th.bing.com/th/id/OIP.crfr5cjCwIdDQufBubCJNwHaE7?cb=iwc1&rs=1&pid=ImgDetMain"
+              alt="img1"
+            />
+            <img
+              src="https://vistapointe.net/images/ferrari-f1-1.jpg"
+              alt="img1"
+            />
+            <img
+              src="https://media.formula1.com/image/upload/t_16by9Centre/f_auto/q_auto/v1739896747/fom-website/2025/Ferrari/Ferrari%20SF-25%20launch%20renders/F677_still_02_v11_169.jpg"
+              alt="img1"
+            />
+          </div>
+          <p>
+            A personal blog where I write about web development, programming and
+            technology
+          </p>
+          <a href="#">View Project</a>
+          <ul>
+            <li>
+              Technology used:
+              <ul>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="pro">
+          <h3>Project two: E-commerce Site</h3>
+          <p class="ScreenShots">ScreenShot of my E-commerce project</p>
+          <div class="PROIMG">
+            <img src="https://wallpaperaccess.com/full/563870.jpg" alt="img1" />
+            <img
+              src="https://wallpaperaccess.com/full/2091869.jpg"
+              alt="img1"
+            />
+            <img
+              src="https://www.hdcarwallpapers.com/walls/red_bull_racing_f1_hd-HD.jpg"
+              alt="img1"
+            />
+          </div>
+          <p>
+            An e-commerce website built to simulate a real-world online shopping
+            experience.
+          </p>
+          <a href="#">View Project</a>
+          <ul>
+            <li>
+              Technology used:
+              <ul>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section id="Contact">
+        <h2>Contact me</h2>
+        <form>
+          <label for="name">Full Name:</label>
+          <input type="text" id="name" placeholder="Enter name" required />
+          <label for="email">Email:</label>
+          <input type="email" id="email" placeholder="Enter email" required />
+          <label for="msg">Message</label>
+          <textarea
+            id="msg"
+            minlength="3"
+            maxlength="200"
+            placeholder="Enter message"
+          ></textarea>
+          <button onclick="submit" id="SubmitBtn">Submit</button>
+        </form>
+      </section>
+    </main>
+    <footer>
+      <p>2025 My Portfolio</p>
+      <p>
+        Follow me on <a href="www.linkedin.com">LinkedIn</a> |
+        <a href="www.gihub.com">Github</a>
+      </p>
+    </footer>
+  </body>
+</html>

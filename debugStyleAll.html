@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Multi-Method CSS Example</title>
+    <!--background color of class highlighted-text has no visibility same for inline styling-->
+    <style>
+      h1 {
+        color: navy;
+        font-size: 28px;
+        background-color: rgba(255, 0, 255, 0.345);
+      }
+      .highlighted-text {
+        background-color: yellow;
+        color: red;
+      }
+    </style>
+    <link rel="stylesheet" href="debugStyleAll.css" />
+  </head>
+  <body>
+    <h1>Main Title</h1>
+    <p style="font-size: 16px; color: #333333">
+      This paragraph has inline styles applied.
+    </p>
+    <p class="highlighted-text">This paragraph uses a class-based style.</p>
+    <div id="main-container">
+      <p>This div should have styles from the external stylesheet.</p>
+    </div>
+  </body>
+</html>
