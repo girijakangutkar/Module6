@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Specificity values</title>
+    <style>
+      div {
+        color: blueviolet;
+      }
+      .highlight {
+        color: cadetblue;
+      }
+      #special {
+        color: cornflowerblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="highlight" id="special">
+      <h1>Hello world!</h1>
+    </div>
+  </body>
+</html>
+
+<!--
+In css id has specificity of 100
+       class has specificity of 10
+       element has 1
+-->
