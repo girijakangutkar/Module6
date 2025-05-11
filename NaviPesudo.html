@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navigation bar styling with pseudo classes</title>
+    <style>
+      a {
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 20px;
+      }
+      nav {
+        background-color: rgba(222, 184, 135, 0.358);
+        padding: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 5px;
+      }
+      section {
+        display: flex;
+        gap: 10px;
+      }
+      a:hover {
+        background-color: rgb(211, 238, 198);
+        border-radius: 20px;
+        border: 1px solid #ccc;
+        padding: 4px;
+      }
+      a:active {
+        background-color: cadetblue;
+        border: 1px solid #ccc;
+        padding: 4px;
+        color: white !important;
+      }
+      nav section:nth-child(1) a {
+        color: red;
+      }
+      nav section:nth-child(2) a {
+        color: rgb(182, 74, 132);
+      }
+      nav section:nth-of-type(3) a {
+        color: green;
+        border: 1px solid rgb(117, 196, 117);
+        padding: 4px;
+        border-radius: 20px;
+      }
+      section > a {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <section>
+          <a href="#">Home</a>
+          <a href="#">About</a>
+        </section>
+        <section>
+          <a href="#">Gallery</a>
+          <a href="#">Settings</a>
+          <a href="#">Contact us</a>
+        </section>
+        <section>
+          <a href="#">Login</a>
+          <a href="#">Register</a>
+        </section>
+      </nav>
+    </header>
+  </body>
+</html>
