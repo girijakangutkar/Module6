@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>(block, inline, inline-block, and none)</title>
+    <style>
+      img {
+        width: 200px;
+        height: 300px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .block-element {
+        display: block;
+        /* width: 100%; */
+        border: 1px solid red;
+      }
+      .inline-element {
+        display: inline;
+        background-color: rgb(232, 232, 131);
+      }
+      .inline-block-element {
+        display: inline-block;
+        background-color: cornsilk;
+      }
+      .hidden-element {
+        visibility: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <div class="block-element">
+        <h2>block element</h2>
+        <img
+          src="https://media.formula1.com/image/upload/t_16by9Centre/f_auto/q_auto/v1739896747/fom-website/2025/Ferrari/Ferrari%20SF-25%20launch%20renders/F677_still_02_v11_169.jpg"
+          alt="img1"
+        />
+        <img
+          src="https://media.formula1.com/image/upload/t_16by9Centre/f_auto/q_auto/v1739896747/fom-website/2025/Ferrari/Ferrari%20SF-25%20launch%20renders/F677_still_02_v11_169.jpg"
+          alt="img1"
+        />
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit,
+          exercitationem cum, hic, deserunt architecto ab eaque necessitatibus
+          fugiat at eius aperiam consequuntur. Accusantium totam ex recusandae
+          velit eaque, neque suscipit!
+        </p>
+      </div>
+      <div class="inline-element">
+        <h2>Inline element</h2>
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex, nemo
+          assumenda impedit nisi fuga, porro maxime magni non eaque molestias
+          molestiae, velit veniam quia sit officia est natus. Aperiam, a?
+        </p>
+        <img
+          src="https://th.bing.com/th/id/OIP.crfr5cjCwIdDQufBubCJNwHaE7?cb=iwc1&rs=1&pid=ImgDetMain"
+          alt="img1"
+        />
+        <img
+          src="https://th.bing.com/th/id/OIP.crfr5cjCwIdDQufBubCJNwHaE7?cb=iwc1&rs=1&pid=ImgDetMain"
+          alt="img1"
+        />
+      </div>
+      <div class="inline-block-element">
+        <h2>Inline block element</h2>
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum
+          suscipit exercitationem, nihil voluptatum consectetur nam labore neque
+          quisquam debitis repellat nostrum, unde voluptatibus laborum ducimus
+          quaerat rem ut? Esse, veritatis.
+        </p>
+        <h3>END</h3>
+        <img src="https://vistapointe.net/images/ferrari-f1-1.jpg" alt="img1" />
+        <img src="https://vistapointe.net/images/ferrari-f1-1.jpg" alt="img1" />
+      </div>
+      <div class="hidden-element">
+        <h2>Hidden element</h2>
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores eos
+          aliquam quisquam, voluptas voluptate blanditiis voluptates
+          consequuntur ab! Distinctio quis amet ullam eum ut laboriosam
+          corrupti! Quo sit nostrum vel!
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
