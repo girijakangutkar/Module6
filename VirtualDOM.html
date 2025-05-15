@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Not Changed</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+  </head>
+  <body>
+    <h2>Button changing title from React</h2>
+    <div id="root"></div>
+    <br />
+    <h2>Button changing title from DOM</h2>
+    <button id="fromDOM" onclick="changeTitle()">Click me!</button>
+    <script>
+      let count = 0;
+      const btn = document.getElementById("fromDOM");
+
+      function changeTitle() {
+        document.title = "New Title";
+        count++;
+        console.log(count);
+      }
+      let button = React.createElement(
+        "button",
+        { onClick: changeTitle },
+        "Click"
+      );
+
+      let root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(button);
+    </script>
+  </body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Original Title</title>
+  </head>
+  <body>
+    <h1>Change the Page Title</h1>
+    <button id="changeTitleButton">Change Title</button>
+
+    <script>
+      // Select the button
+      const button = document.getElementById("changeTitleButton");
+
+      // Add an event listener to change the title on button click
+      button.addEventListener("click", () => {
+        document.title = "New Title!";
+        alert("Page title changed to: " + document.title);
+      });
+    </script>
+  </body>
+</html> -->
