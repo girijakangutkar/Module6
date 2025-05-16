@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conditional color</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const { useState } = React;
+
+      function ToggleBtn() {
+        const [bgColor, setBgColor] = useState("green");
+
+        function changeColor() {
+          setBgColor((prevColor) => (prevColor === "green" ? "blue" : "green"));
+        }
+
+        return (
+          <button
+            onClick={changeColor}
+            style={{ backgroundColor: bgColor, color: "white" }}
+          >
+            {bgColor === "green" ? "Green" : "Blue"}
+          </button>
+        );
+      }
+
+      function App() {
+        return <ToggleBtn />;
+      }
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

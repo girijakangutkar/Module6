@@ -14,28 +14,42 @@
     ></script>
   </head>
   <body>
-    <h2>Button changing title from React</h2>
-    <div id="root"></div>
-    <br />
+    <!-- <h2>Button changing title from React</h2> -->
+    <div id="root">Hello</div>
+    <!-- <br />
     <h2>Button changing title from DOM</h2>
-    <button id="fromDOM" onclick="changeTitle()">Click me!</button>
+    <button id="fromDOM" onclick="changeTitle()">Click me!</button> -->
     <script>
-      let count = 0;
-      const btn = document.getElementById("fromDOM");
+      //   let count = 0;
+      //   const btn = document.getElementById("fromDOM");
 
-      function changeTitle() {
-        document.title = "New Title";
-        count++;
-        console.log(count);
-      }
-      let button = React.createElement(
-        "button",
-        { onClick: changeTitle },
-        "Click"
+      //   function changeTitle() {
+      //     document.title = "New Title";
+      //     count++;
+      //     console.log(count);
+      //   }
+      //   let button = React.createElement(
+      //     "button",
+      //     { onClick: changeTitle },
+      //     "Click"
+      //   );
+
+      //   let root = ReactDOM.createRoot(document.getElementById("root"));
+      //   root.render(button);
+
+      //   const userName = "John";
+      //   const element = React.createElement("h1", null, "Hello, {userName}!");
+      //   ReactDOM.createRoot(document.getElementById("root")).render(element);
+
+      const list = ["Apple", "Banana", "Cherry"];
+      const element = (
+        <ul>
+          {list.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
       );
-
-      let root = ReactDOM.createRoot(document.getElementById("root"));
-      root.render(button);
+      ReactDOM.createRoot(document.getElementById("root")).render(element);
     </script>
   </body>
 </html>
