@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic form field</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+      .container {
+        /* width: 90vw; */
+        /* height: 90vh; */
+        /* border: 1px solid bisque; */
+      }
+      .card {
+        width: 80vw;
+        height: 50vh;
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        margin: 10%;
+        align-content: center;
+        /* border: 1px solid bisque; */
+      }
+
+      .card input {
+        padding: 8px;
+        margin: 10px;
+        border: 2px solid blue;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const { useState } = React;
+
+      function EmailField() {
+        function handleChange(e) {
+          const value = e.target.value;
+          setEmail(value);
+
+          if (!isValidEmail(value)) {
+            setErr("Invalid email");
+          } else {
+            setErr("");
+          }
+        }
+
+        function isValidEmail(email) {
+          return /\S+@\S+\.\S+/.test(email);
+        }
+        const [email, setEmail] = useState("");
+        const [err, setErr] = useState("");
+
+        return (
+          <div className="container">
+            <div className="card">
+              <label htmlFor="email">Email field </label>
+              <input
+                type="email"
+                value={email}
+                name={email}
+                onChange={handleChange}
+                placeholder="Enter your email"
+              />
+              <p>{email}</p>
+              {err && <p style={{ color: "red" }}>{err}</p>}
+            </div>
+          </div>
+        );
+      }
+
+      function App() {
+        return (
+          <>
+            <EmailField />
+          </>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
