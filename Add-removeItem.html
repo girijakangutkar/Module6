@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add and remove item from an array</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root">Hello</div>
+    <script type="text/babel">
+      const { useState } = React;
+
+      function ItemList() {
+        const [item, setItem] = useState([]);
+
+        function addItem() {
+          setItem([...item]);
+        }
+
+        function removeLastItem() {
+          setItem(item.slice(0, -1));
+        }
+
+        return (
+          <div>
+            <label htmlFor="name">Name</label>
+            <input
+              name="name"
+              onChange={(e) => setItem([...item, e.target.value])}
+            />
+
+            <label htmlFor="quantity">Quantity</label>
+            <input
+              name="quantity"
+              onChange={(e) => setItem([...item, e.target.value])}
+            />
+
+            <button onClick={addItem}>Add Item</button>
+            <button onClick={removeLastItem}>Remove last item</button>
+            <ul>
+              {item.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        );
+      }
+
+      function App() {
+        return (
+          <>
+            <ItemList />
+          </>
+        );
+      }
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>

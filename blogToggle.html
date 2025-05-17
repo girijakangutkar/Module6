@@ -11,7 +11,10 @@
   <body>
     <div id="root"></div>
     <script type="text/babel">
+      const { useState } = React;
       function BlogCard({ title, content, isFeatured }) {
+        const [show, setShow] = useState(false);
+
         const cardStyle = {
           border: "1px solid gray",
           padding: "10px",
@@ -21,10 +24,27 @@
         return (
           <div style={cardStyle}>
             <h2>{title}</h2>
-            <p>{content}</p>
+            <button onClick={() => setShow(!show)}>
+              {show ? "Hide Content" : "Show Content"}
+            </button>
+            {show && <p>{content}</p>}
           </div>
         );
       }
+
+      // function showContent({ content }) {
+      //   return (
+      //     <div>
+      //       <p>Hello</p>
+      //       {blogs.map((blog, index) => (
+      //         <>
+      //           <p key={index}>{console.log(blog.content)}</p>
+      //           <p>{blog.content}</p>
+      //         </>
+      //       ))}
+      //     </div>
+      //   );
+      // }
 
       function App() {
         const blogs = [
@@ -39,7 +59,6 @@
             isFeatured: false,
           },
         ];
-
         return (
           <>
             <main>
