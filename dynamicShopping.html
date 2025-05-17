@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic shopping list</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const { useState } = React;
+
+      function ShoppingList() {
+        const [inputData, setInputData] = useState({
+          name: "",
+          quantity: "",
+        });
+        const [shoppingList, setShoppingList] = useState([]);
+
+        function handleChange(e) {
+          setInputData({
+            ...inputData,
+            [e.target.name]: e.target.value,
+          });
+          //   console.log("submitted", shoppingList.name, shoppingList.quantity);
+          //   alert({shoppingList.name} )
+        }
+
+        function handleSubmit(e) {
+          e.preventDefault();
+
+          if (!inputData.name) {
+            alert("Name cannot be empty");
+            return;
+          }
+
+          if (!inputData.quantity >= 1 && isNaN(inputData.quantity)) {
+            alert("Quantity must be grater than 1");
+            return;
+          }
+          setShoppingList([...shoppingList, inputData]);
+          setInputData({ name: "", quantity: "" });
+          //   console.log("submitted", shoppingList.name, shoppingList.quantity);
+        }
+
+        function removeItem() {
+          setShoppingList(shoppingList.slice(0, -1));
+        }
+
+        function clearAll() {
+          setShoppingList([]);
+        }
+
+        return (
+          <div>
+            <form onSubmit={handleSubmit}>
+              <label htmlFor="name">Name</label>
+              <input
+                name="name"
+                value={inputData.name}
+                onChange={handleChange}
+                required
+              />
+
+              <label htmlFor="quantity">Quantity</label>
+              <input
+                name="quantity"
+                value={inputData.quantity}
+                onChange={handleChange}
+                required
+              />
+              <button type="submit">Add item</button>
+            </form>
+            <ul>
+              {shoppingList.map((item, index) => (
+                <li key={index}>
+                  {item.name} - {item.quantity}
+                </li>
+              ))}
+            </ul>
+            <button onClick={removeItem}>Remove</button>
+            <button onClick={clearAll}>Clear all</button>
+          </div>
+        );
+      }
+
+      function App() {
+        return (
+          <>
+            <ShoppingList />
+          </>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
