@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student attendance</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const { useState } = React;
+
+      function TaskManagement() {
+        const [taskList, setTaskList] = useState([]);
+        const [task, setTask] = useState({
+          title: "",
+          priority: "High",
+          status: false,
+        });
+        const [filter, setFilter] = useState("All");
+        const [complete, setComplete] = useState("All");
+
+        function handleFilterChange(e) {
+          setFilter(e.target.value);
+        }
+
+        function handleStatusChange(e) {
+          setComplete(e.target.value);
+        }
+
+        const filteredTasks = taskList.filter((task) => {
+          const matchesPriority = filter === "All" || task.priority === filter;
+          const matchesStatus =
+            complete === "All" ||
+            (complete === "Complete" && task.status) ||
+            (complete === "Incomplete" && !task.status);
+
+          return matchesPriority && matchesStatus;
+        });
+
+        function handleChange(e) {
+          setTask({ ...task, [e.target.name]: e.target.value });
+        }
+
+        function handleSubmit(e) {
+          e.preventDefault();
+          if (task.title) {
+            setTaskList([...taskList, task]);
+            setTask({ title: "", priority: "High", status: false });
+          }
+        }
+
+        function handleToggle() {
+          setTask({ ...task, status: !task.status });
+        }
+
+        return (
+          <div>
+            <form onSubmit={handleSubmit}>
+              <label htmlFor="title">Title:</label>
+              <input name="title" value={task.title} onChange={handleChange} />
+
+              <label htmlFor="priority">Priority:</label>
+              <select
+                name="priority"
+                value={task.priority}
+                onChange={handleChange}
+              >
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+              </select>
+
+              <button type="button" onClick={handleToggle}>
+                {task.status ? "Complete" : "Incomplete"}
+              </button>
+
+              <button type="submit">Add</button>
+            </form>
+
+            <h3>Total Number of Tasks: {taskList.length}</h3>
+
+            <label htmlFor="filter">Filter by Priority:</label>
+            <select name="filter" value={filter} onChange={handleFilterChange}>
+              <option value="All">All</option>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+
+            <label htmlFor="filterStatus">Filter by Status:</label>
+            <select
+              name="filterStatus"
+              value={complete}
+              onChange={handleStatusChange}
+            >
+              <option value="All">All</option>
+              <option value="Complete">Completed</option>
+              <option value="Incomplete">Incomplete</option>
+            </select>
+
+            <ul>
+              {filteredTasks
+                .sort((a, b) => a.priority - b.priority)
+                .map((task, index) => (
+                  <li key={index}>
+                    <input type="checkbox" />{" "}
+                    <label>
+                      {task.title} - {task.priority} -{" "}
+                      {task.status ? "Complete" : "Incomplete"}
+                    </label>
+                  </li>
+                ))}
+            </ul>
+          </div>
+        );
+      }
+
+      function App() {
+        return <TaskManagement />;
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>

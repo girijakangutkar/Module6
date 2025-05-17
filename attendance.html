@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student attendance</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const { useState } = React;
+
+      function StudentAttendance() {
+        const [studentList, setStudentList] = useState([
+          { id: 1, name: "Girija", present: true },
+          { id: 2, name: "Gauri", present: false },
+        ]);
+        const [student, setStudent] = useState({
+          id: "",
+          name: "",
+          present: false,
+        });
+        const [filter, setFilter] = useState("All");
+
+        function handleFilterChange(e) {
+          setFilter(e.target.value);
+        }
+
+        const filterStudent = studentList.filter((student) => {
+          if (filter == "All") return true;
+          if (filter == "Present") return student.present == true;
+          if (filter == "Absent") return student.present == false;
+        });
+
+        function handleChange(e) {
+          setStudent({ ...student, [e.target.name]: e.target.value });
+        }
+
+        function handleSubmit(e) {
+          e.preventDefault();
+          setStudentList([...studentList, student]);
+          setStudent({ id: "", name: "", present: "" });
+        }
+
+        function handleToggle() {
+          setStudent({ ...student, present: !student.present });
+        }
+
+        return (
+          <div>
+            <form onSubmit={handleSubmit}>
+              <label htmlFor="id">Roll Number:</label>
+              <input name="id" value={student.id} onChange={handleChange} />
+              <label htmlFor="name">Name</label>
+              <input name="name" value={student.name} onChange={handleChange} />
+              <label htmlFor="present">Attendance</label>
+              <button type="button" onClick={handleToggle}>
+                {student.present ? "Present" : "Absent"}
+              </button>
+              <button type="submit">Add</button>
+            </form>
+            <h3>Total Number of Student : {studentList.length}</h3>
+            <ul>
+              {filterStudent.map((student, index) => (
+                <li>
+                  {student.id} - {student.name} -{" "}
+                  {student.present ? "Present" : "Absent"}
+                </li>
+              ))}
+            </ul>
+
+            <select
+              name="FilterStudent"
+              value={filter}
+              onChange={handleFilterChange}
+            >
+              <option value="All">All</option>
+              <option value="Present">Present</option>
+              <option value="Absent">Absent</option>
+            </select>
+          </div>
+        );
+      }
+
+      function App() {
+        return (
+          <>
+            <StudentAttendance />
+          </>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
