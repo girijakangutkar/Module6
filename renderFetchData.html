@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fetch data</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="renderFetchData.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const { useState } = React;
+
+      function App() {
+        const [product, setProduct] = useState([]);
+        const [loading, setLoading] = useState(false);
+        const [err, setErr] = useState(false);
+
+        async function fetchData() {
+          setLoading(true);
+
+          try {
+            let response = await fetch("https://fakestoreapi.com/products");
+            let data = await response.json();
+            console.log(data);
+            setProduct(data);
+          } catch (err) {
+            console.log("Err:", err);
+            setErr(true);
+          } finally {
+            setLoading(false);
+          }
+        }
+
+        if (loading) {
+          return (
+            <div class="lds-facebook">
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          );
+        }
+
+        if (err) {
+          return (
+            <div>
+              <h1>Something went wrong!</h1>
+            </div>
+          );
+        }
+
+        return (
+          <>
+            <h1>Fetch Products</h1>
+            <button onClick={fetchData}>Fetch data</button>
+            <div class="container">
+              {product.map((ele, index) => (
+                <div key={index} class="card">
+                  <img src={ele.image} />
+                  <h2>{ele.title}</h2>
+                  <p>{ele.description}</p>
+                  <p>{ele.category}</p>
+                  <p>{ele.rating.rate}</p>
+                  <p>{ele.price}</p>
+                </div>
+              ))}
+            </div>
+          </>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>

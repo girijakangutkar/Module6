@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fetching meme</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="memeFetch.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const { useState } = React;
+
+      function App() {
+        const [memeData, setMemeData] = useState([]);
+        const [sortIt, setSortIt] = useState("All");
+        const [filterMeme, setFilterMeme] = useState("All");
+        const [loading, setLoading] = useState(false);
+        const [errMsg, setErrMsg] = useState(false);
+        const [search, setSearch] = useState("");
+        const [themeToggle, setThemeToggle] = useState(false);
+
+        async function fetchMeme() {
+          setLoading(true);
+          try {
+            const response = await axios.get(
+              "https://api.imgflip.com/get_memes"
+            );
+            console.log(response.data.data.memes);
+            setMemeData(response.data.data.memes);
+            setLoading(false);
+            //for fetch
+            // const info = await response.json();
+            // setData(info.data.memes);
+          } catch (err) {
+            console.log("An error occurred:", err);
+            setErrMsg(true);
+          } finally {
+            setLoading(false);
+          }
+        }
+
+        function handleSorting(e) {
+          setSortIt(e.target.value);
+        }
+
+        function handleSearch(e) {
+          setSearch(e.target.value);
+        }
+
+        function handleFiltering(e) {
+          setFilterMeme(e.target.value);
+        }
+
+        const filteredAndSortedMemes = memeData
+          .filter((meme) => {
+            const matchSearch = meme.name
+              .toLowerCase()
+              .includes(search.toLowerCase());
+            if (filterMeme === "All") return matchSearch;
+            if (filterMeme === "width") return meme.width > 500 && matchSearch;
+            if (filterMeme === "height")
+              return meme.height > 500 && matchSearch;
+          })
+          .sort((a, b) => {
+            if (sortIt === "All") return 0;
+            if (sortIt === "SortByName") return a.name.localeCompare(b.name);
+            if (sortIt === "SortByWidth") return a.width - b.width;
+          });
+
+        function resetFilter() {
+          setFilterMeme("All");
+          setSortIt("All");
+          setSearch("");
+        }
+
+        function toggleTheme() {
+          setThemeToggle((prevTheme) => {
+            const theme = !prevTheme;
+            if (theme) {
+              document.body.classList.add("dark-mode");
+              document.body.classList.remove("light-mode");
+            } else {
+              document.body.classList.add("light-mode");
+              document.body.classList.remove("dark-mode");
+            }
+
+            return theme;
+          });
+        }
+
+        if (loading) {
+          return (
+            <div>
+              <p>Loading</p>
+            </div>
+          );
+        }
+
+        if (errMsg) {
+          return (
+            <div>
+              <img
+                src="https://static.vecteezy.com/system/resources/previews/008/516/025/non_2x/some-thing-went-wrong-flat-illustration-concept-vector.jpg"
+                style={{ width: "100%", height: "100%" }}
+              />
+            </div>
+          );
+        }
+
+        return (
+          <div className={themeToggle ? "dark-mode" : "light-mode"}>
+            <nav>
+              <button onClick={fetchMeme}>Fetch meme</button>
+              <select
+                name={filterMeme}
+                value={filterMeme}
+                onChange={handleFiltering}
+              >
+                <option value="All" name="All">
+                  show All
+                </option>
+                <option value="width">Width more than 500</option>
+                <option value="height">heigh more than 500</option>
+              </select>
+              <select name={sortIt} value={sortIt} onChange={handleSorting}>
+                <option value="All" name="All">
+                  show All
+                </option>
+                <option value="width">Sort by width</option>
+              </select>
+              <input value={search} onChange={handleSearch} />
+              <button onClick={resetFilter}>Reset filter</button>
+              <button onClick={toggleTheme}>
+                {themeToggle ? "dark" : "white"}
+              </button>
+            </nav>
+
+            <div className="container">
+              {filteredAndSortedMemes.length == 0 ? (
+                <h3>No memes found</h3>
+              ) : (
+                filteredAndSortedMemes.map((ele, index) => (
+                  <div className="cards">
+                    <h3>{ele.name}</h3>
+                    <img src={ele.url} />
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
