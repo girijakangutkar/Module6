@@ -7,6 +7,110 @@
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+      .container {
+        display: flex;
+      }
+      .col1 {
+        width: 50%;
+        border: 1px solid black;
+      }
+      .col1 form {
+        display: flex;
+        flex-direction: column;
+        margin: 5px;
+      }
+      .col2 {
+        width: 50%;
+        border: 1px solid black;
+        display: flex;
+        flex-direction: row;
+      }
+
+      .col1 label,
+      .col2 label {
+        text-align: left;
+        width: 300px;
+        align-self: center;
+      }
+
+      .col1 input {
+        padding: 5px;
+        width: 300px;
+        align-self: center;
+        text-align: center;
+      }
+
+      select {
+        background-color: rgb(58, 122, 47);
+      }
+
+      button:nth-of-type(1) {
+        background-color: rgb(28, 36, 93);
+      }
+
+      .tog {
+        color: rgb(28, 36, 93) !important;
+      }
+
+      button,
+      select,
+      .tog {
+        margin: 5px;
+        width: 300px;
+        padding: 5px;
+        font-weight: bold;
+        color: white;
+        align-self: center;
+        text-align: center;
+
+        border-radius: 5px;
+        border: none;
+      }
+
+      .toggle input[type="checkbox"] {
+        height: 0;
+        width: 0;
+        visibility: hidden;
+      }
+
+      .toggle label {
+        cursor: pointer;
+        text-indent: -9999px;
+        width: 50px;
+        height: 30px;
+        background: grey;
+        display: block;
+        border-radius: 10px;
+        position: relative;
+      }
+
+      .toggle label:after {
+        content: "";
+        position: absolute;
+        top: 0.5px;
+        left: 0.02px;
+        width: 30px;
+        height: 30px;
+        background: #fff;
+        border-radius: 10px;
+        transition: 0.3s;
+      }
+
+      .toggle input:checked + label {
+        background: #bada55;
+      }
+
+      .toggle input:checked + label:after {
+        left: calc(100% - 5px);
+
+        transform: translateX(-100%);
+      }
+
+      .toggle label:active:after {
+        width: 50px;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
@@ -58,64 +162,90 @@
         }
 
         return (
-          <div>
-            <form onSubmit={handleSubmit}>
-              <label htmlFor="title">Title:</label>
-              <input name="title" value={task.title} onChange={handleChange} />
+          <>
+            <div className="container">
+              <div className="col1">
+                <form onSubmit={handleSubmit}>
+                  <label htmlFor="title">Title:</label>
+                  <input
+                    name="title"
+                    value={task.title}
+                    onChange={handleChange}
+                  />
 
-              <label htmlFor="priority">Priority:</label>
-              <select
-                name="priority"
-                value={task.priority}
-                onChange={handleChange}
-              >
-                <option value="High">High</option>
-                <option value="Medium">Medium</option>
-                <option value="Low">Low</option>
-              </select>
+                  <label htmlFor="priority">Priority:</label>
+                  <select
+                    name="priority"
+                    value={task.priority}
+                    onChange={handleChange}
+                  >
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                  </select>
 
-              <button type="button" onClick={handleToggle}>
-                {task.status ? "Complete" : "Incomplete"}
-              </button>
+                  <p className="tog">
+                    {task.status ? "Complete" : "Incomplete"}
+                  </p>
 
-              <button type="submit">Add</button>
-            </form>
+                  <div className="toggle">
+                    <input
+                      type="checkbox"
+                      id="switch"
+                      onChange={handleToggle}
+                    />
 
-            <h3>Total Number of Tasks: {taskList.length}</h3>
-
-            <label htmlFor="filter">Filter by Priority:</label>
-            <select name="filter" value={filter} onChange={handleFilterChange}>
-              <option value="All">All</option>
-              <option value="High">High</option>
-              <option value="Medium">Medium</option>
-              <option value="Low">Low</option>
-            </select>
-
-            <label htmlFor="filterStatus">Filter by Status:</label>
-            <select
-              name="filterStatus"
-              value={complete}
-              onChange={handleStatusChange}
-            >
-              <option value="All">All</option>
-              <option value="Complete">Completed</option>
-              <option value="Incomplete">Incomplete</option>
-            </select>
-
-            <ul>
-              {filteredTasks
-                .sort((a, b) => a.priority - b.priority)
-                .map((task, index) => (
-                  <li key={index}>
-                    <input type="checkbox" />{" "}
-                    <label>
-                      {task.title} - {task.priority} -{" "}
+                    <label for="switch">
                       {task.status ? "Complete" : "Incomplete"}
                     </label>
-                  </li>
-                ))}
-            </ul>
-          </div>
+                  </div>
+
+                  <button type="submit">Add</button>
+                </form>
+              </div>
+
+              <div className="col2">
+                <label htmlFor="filter">Filter by Priority:</label>
+                <select
+                  name="filter"
+                  value={filter}
+                  onChange={handleFilterChange}
+                >
+                  <option value="All">All</option>
+                  <option value="High">High</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Low">Low</option>
+                </select>
+
+                <label htmlFor="filterStatus">Filter by Status:</label>
+                <select
+                  name="filterStatus"
+                  value={complete}
+                  onChange={handleStatusChange}
+                >
+                  <option value="All">All</option>
+                  <option value="Complete">Completed</option>
+                  <option value="Incomplete">Incomplete</option>
+                </select>
+              </div>
+            </div>
+            <div className="col3">
+              <h3>Total Number of Tasks: {taskList.length}</h3>
+              <ul>
+                {filteredTasks
+                  .sort((a, b) => a.priority - b.priority)
+                  .map((task, index) => (
+                    <li key={index}>
+                      <input type="checkbox" />{" "}
+                      <label>
+                        {task.title} - {task.priority} -{" "}
+                        {task.status ? "Complete" : "Incomplete"}
+                      </label>
+                    </li>
+                  ))}
+              </ul>
+            </div>
+          </>
         );
       }
 
